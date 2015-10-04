@@ -5,8 +5,6 @@ carregar::carregar(QWidget *parent) : QWidget(parent)
 
     isImage = false;
 
-   // imgCop2 = new QImage;
-
     imgOrig = new QLabel;
     imgOrig->setBackgroundRole(QPalette::Base);
     imgOrig->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
@@ -21,6 +19,7 @@ carregar::carregar(QWidget *parent) : QWidget(parent)
 
 carregar::~carregar()
 {
+    delete imgCop1;
     delete imgOrig;
 }
 
@@ -42,7 +41,7 @@ void carregar::slotCarregar()
         imgCop1 -> setPixmap(QPixmap::fromImage(ibagem));
         imgCop1 -> adjustSize();
 
-        imgCop2 = imgOrig->pixmap()->toImage();
+        imgCop2 = ibagem.copy();
 
         isImage = true;
     }
