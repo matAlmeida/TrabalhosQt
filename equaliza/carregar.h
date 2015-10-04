@@ -15,7 +15,7 @@ public:
 
     QLabel *imgOrig;
     QLabel *imgCop1;
-    QLabel *imgCop2;
+    QImage *imgCop2;
     bool isImage;
 
 signals:

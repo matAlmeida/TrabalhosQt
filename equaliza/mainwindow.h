@@ -19,12 +19,16 @@ public:
     ~MainWindow();
     carregar *load;
     processar *process;
+    int *escalaCinza;
+    void limpaEscala();
+    void criaEscala(QImage);
 
 private:
     Ui::MainWindow *ui;
 
 public slots:
     void slotBrilho(int);
+    void slotGrafico();
 };
 
 #endif // MAINWINDOW_H

@@ -16,13 +16,11 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     qcustomplot.cpp \
     carregar.cpp \
-    processar.cpp \
-    grafico.cpp
+    processar.cpp
 
 HEADERS  += mainwindow.h \
     qcustomplot.h \
     carregar.h \
-    processar.h \
-    grafico.h
+    processar.h
 
 FORMS    += mainwindow.ui
