@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->widgetGrafico->xAxis->setLabel("Escala");
     ui->widgetGrafico->yAxis->setLabel("Qntd");
     ui->widgetGrafico->xAxis->setRange(0, 255);
-    ui->widgetGrafico->yAxis->setRange(0, 10000);
+    ui->widgetGrafico->yAxis->setRange(0, 1000);
 
     ui->scrollImagem->setWidget(load->imgCop1);
 
@@ -60,19 +60,19 @@ void MainWindow::slotGrafico(){
 
 }
 
-void MainWindow::criaEscala(QImage *imagem){
+void MainWindow::criaEscala(QImage imagem){
 
     QColor tempColor;
     int cinza;
 
     limpaEscala();
 
-    if(imagem->isGrayscale()){
+    if(imagem.isGrayscale()){
 
-        for (int i = 0; i < imagem->width(); i++){
-            for (int j = 0; j < imagem->height(); j++){
+        for (int i = 0; i < imagem.width(); i++){
+            for (int j = 0; j < imagem.height(); j++){
 
-                tempColor = imagem->pixel(i, j);
+                tempColor = imagem.pixel(i, j);
                 cinza = 255 - tempColor.black();
                 escalaCinza[cinza]++;
 

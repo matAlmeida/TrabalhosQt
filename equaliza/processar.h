@@ -12,7 +12,7 @@ public:
     ~processar();
 
     QLabel *imgFinal;
-    QImage *imgFinalCopy;
+    QImage imgFinalCopy;
     void aplicar(QImage, int , bool);
 
 signals:

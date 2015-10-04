@@ -8,8 +8,6 @@ processar::processar(QWidget *parent) : QWidget(parent)
     imgFinal->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     imgFinal->setScaledContents(true);
 
-    imgFinalCopy = new QImage;
-
 }
 
 processar::~processar()
@@ -51,7 +49,7 @@ void processar::aplicar(QImage tempImg, int brilho, bool isImage){
             imgFinal -> setPixmap(QPixmap::fromImage(tempImg));
             imgFinal -> adjustSize();
 
-            imgFinalCopy = imgFinal->pixmap()->toImage();
+            imgFinalCopy = tempImg.copy();
 
         } //Final do If greyScale
 
