@@ -5,7 +5,7 @@ carregar::carregar(QWidget *parent) : QWidget(parent)
 
     isImage = false;
 
-    imgCop2 = new QImage;
+   // imgCop2 = new QImage;
 
     imgOrig = new QLabel;
     imgOrig->setBackgroundRole(QPalette::Base);

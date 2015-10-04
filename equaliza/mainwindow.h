@@ -21,7 +21,7 @@ public:
     processar *process;
     int *escalaCinza;
     void limpaEscala();
-    void criaEscala(QImage);
+    void criaEscala(QImage *);
 
 private:
     Ui::MainWindow *ui;
