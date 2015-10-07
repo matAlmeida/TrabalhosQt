@@ -7,6 +7,7 @@ processar::processar(QWidget *parent) : QWidget(parent)
     imgFinal->setBackgroundRole(QPalette::Base);
     imgFinal->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     imgFinal->setScaledContents(true);
+    processado = false;
 
 }
 
@@ -27,7 +28,7 @@ void processar::aplicar(QImage tempImg, int brilho, bool isImage){
         //int r, g, b;
         int cinza;
 
-        if (tempImg.isGrayscale()){
+        //if (tempImg.isGrayscale()){
             for(int i = 0; i < tempImg.width(); i++){
                 for(int j = 0; j < tempImg.height(); j++){
                     tempColor = tempImg.pixel(i,j);
@@ -50,8 +51,9 @@ void processar::aplicar(QImage tempImg, int brilho, bool isImage){
             imgFinal -> adjustSize();
 
             imgFinalCopy = tempImg.copy();
+            processado = true;
 
-        } //Final do If greyScale
+        //} //Final do If greyScale
 
         /*for(int i = 0; i < tempImg.width(); i++){
             for(int j = 0; j < tempImg.height(); j++){
@@ -80,6 +82,12 @@ void processar::aplicar(QImage tempImg, int brilho, bool isImage){
                 cor = qRgb(r, g, b);
                 tempImg.setPixel(i, j, cor);
             }
+
+            imgFinal -> setPixmap(QPixmap::fromImage(tempImg));
+            imgFinal -> adjustSize();
+
+            imgFinalCopy = tempImg.copy();
+            processado = true;
         } */
 
 

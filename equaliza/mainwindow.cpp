@@ -19,14 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->widgetGrafico->yAxis->setLabel("Qntd");
     ui->widgetGrafico->xAxis->setRange(0, 255);
     ui->widgetGrafico->yAxis->setRange(0, 1000);
-    //////////////////////////////////////////////////////////////////////
     ui->widgetGrafico->QCustomPlot::setInteractions(QCP::iRangeZoom);
     ui->widgetGrafico->setInteraction(QCP::iRangeDrag, true);
-    /* Faltaram essas 2 linhas aqui que servem para habilitar o usuario a mexer no grafico
-     * usando o mouse, ele seta a interação de arrastar como TRUE e a de zoom tbm.
-     * Após ativar isso, percebi que o grafico está plotando, mas tem algo de errado com seu vetor,
-     * pois o grafico está todo em 0. Outros erros encontrados abaixo.*/
-    //////////////////////////////////////////////////////////////////////
 
 
     ui->scrollImagem->setWidget(load->imgCop1);
@@ -43,7 +37,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::slotBrilho(int brilho){
 
-    process->aplicar(load->imgOrig->pixmap()->toImage(), brilho, load->isImage);
+    brilhinho = brilho;
+
+    process->aplicar(load->imgCop4, brilho, load->isImage);
 
     load->imgCop1->setPixmap(QPixmap::fromImage(process->imgFinal->pixmap()->toImage()));
 
@@ -53,19 +49,17 @@ void MainWindow::slotGrafico(){
 
     if(load->isImage == true){ //Aqui estava apenas if(load->isImage), vc esqueceu do "== true"
 
+        process->aplicar(load->imgCop3, brilhinho, load->isImage);
+
         QVector<double> x(256), y(256);
-        criaEscala(process->imgFinalCopy); //Outro erro encontrado nessa linha
-        /* Bom, se vc carrega a imagem a primeira vez e não faz nenhuma modificação então
-         * imgFinalCopy não tem imagem alguma carregada, ou seja, não vai fazer modificação alguma no
-         * seu vetor escalaCinza, pois não vai ser imagem.isgrayScale. Como corrigir?
-         * Ao carregar a imagem pela primeira vez vc teria que fazer a leitura direta dela ouu
-         * você pode fazer uma copia da imagem original carregada pela primeira vez em imgFinalCopy.
-         * Assim, mesmo se você não fizer nenhuma modificação, imgFinalCopy vai ter valor!
-         * Não corrigi isso, deixei ao seu criterio, oq fazer!*/
+        if(process->processado == true)
+            criaEscala(process->imgFinalCopy);
+        else
+            criaEscala(load->imgCop2);
 
         for(int i = 0; i < 256; i++){
             x[i] = i;
-            y[i] = escalaCinza[i];
+            y[i] = escalaCinza[i]/256;
         }
 
         ui->widgetGrafico->addGraph();
@@ -83,7 +77,7 @@ void MainWindow::criaEscala(QImage imagem){
 
     limpaEscala();
 
-    if(imagem.isGrayscale()){
+    //if(imagem.isGrayscale()){
 
         for (int i = 0; i < imagem.width(); i++){
             for (int j = 0; j < imagem.height(); j++){
@@ -93,7 +87,7 @@ void MainWindow::criaEscala(QImage imagem){
                 escalaCinza[cinza]++;
             }
         }
-    }
+    //}
 }
 
 void MainWindow::limpaEscala(){

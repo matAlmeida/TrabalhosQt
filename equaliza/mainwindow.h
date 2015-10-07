@@ -20,6 +20,7 @@ public:
     carregar *load;
     processar *process;
     int *escalaCinza;
+    int brilhinho;
     void limpaEscala();
     void criaEscala(QImage);
 

@@ -43,6 +43,10 @@ void carregar::slotCarregar()
 
         imgCop2 = ibagem.copy();
 
+        imgCop3 = ibagem.copy();
+
+        imgCop4 = imgCop3.scaled(300,300);
+
         isImage = true;
     }
 }
